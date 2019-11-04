@@ -5,6 +5,8 @@
  */
 package lesson02.task03;
 
+import java.util.Arrays;
+
 /**
  * Задание 3. Дан массив объектов Person. Класс Person характеризуется полями age (возраст, целое число 0-100),
  * sex (пол – объект класса Sex со строковыми константами внутри MAN, WOMAN), name (имя - строка).
@@ -13,7 +15,7 @@ package lesson02.task03;
  * -первые идут мужчины
  * -выше в списке тот, кто более старший
  * -имена сортируются по алфавиту
- *
+ * <p>
  * Программа должна вывести на экран отсортированный список и время работы каждого алгоритма сортировки.
  * Предусмотреть генерацию исходного массива (10000 элементов и более).
  * Если имена людей и возраст совпадают, выбрасывать в программе пользовательское исключение.
@@ -22,28 +24,54 @@ package lesson02.task03;
 public class Main {
 
 
-        public static void main(String[] args) {
-            int countPerson = 10;
-            Person[] people = new Person[countPerson];
-            // Заполнение массива объектами класса Person
-            for (int i = 0; i<countPerson; i++ ) {
-                people[i] = new Person();
-            }
-//            SortBuble sortBuble = new SortBuble(people);
-//            try {
-//                sortBuble.sort();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+    public static void main(String[] args) {
+        //Замер времени выполнения программы сортировки - старт
+        long startTime = System.currentTimeMillis();
 
-            SortByPersons sort = new SortByPersons(people);
-            for(int i = 0; i < people.length-1; i++){
-                for(int j = 0; j < people.length-1; j++){
-                    sort.compare(people[j], people[i]);
+        long total = 0;
+        for (int i = 0; i < 10000000; i++) {
+            total += i;
+        }
 
-                }
-                people[i].toString();
-            }
+        // количесто создаваемых персон
+        int countPerson = 10000;
+
+        Person[] people = new Person[countPerson];
+        // Заполнение массива объектами класса Person
+        for (int i = 0; i < countPerson; i++) {
+            people[i] = new Person();
+        }
+
+        // Создание экземпляра класса SortByPersons
+        SortByPersons comparator = new SortByPersons();
+        /**
+         * Вызов метода сортировки массива Person
+         * @param people - массив Person
+         * @param comparator - экземпляра класса SortByPersons
+         */
+        Arrays.sort(people, comparator);
+        for (int i = 0; i < people.length; i++) {
+            System.out.println(people[i].toString());
+        }
+
+        /**
+         * Неудачная попытка с SortBuble
+         */
+//        SortBuble sortBuble = new SortBuble(people);
+//        try {
+//            sortBuble.sort();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        sortBuble.printPerson();
+
+        //Замер времени выполнения программы сортировки - завершение
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        System.out.println(elapsedTime);
+
+
+
 
 // Одиночные сортировки
 
@@ -52,6 +80,7 @@ public class Main {
 //            sortBuble.sortAge(people);
 //            System.out.println("_________________________________");
 //            sortBuble.sortSex(people);
-        }
     }
+
+}
 

@@ -13,39 +13,59 @@ public class SortBuble implements Sortable {
     }
 
     //Отсортируем массив строк через пузырьковую сортировку по полу.
-    @Override
-    public void sort() throws Exception {
-        sortSex(people);
-        for (int j = 0; j < people.length; j++) {
-            for (int i = j + 1; i < people.length; i++) {
-                switch (people[i].getSex()) {
-                    case MAN:
-                        if (people[i].getName().compareTo(people[j].getName()) != 0) {
-                            toSwap(j, i);
-                        } else if (people[i].getAge() != people[i + 1].getAge()) {
-                            toSwap(i, i + 1);
-                        }
 
-                        break;
-                    case WOMAN:
-                        if(people[i].getAge() != people[i + 1].getAge()){
-                            toSwap(i,i+1);
+    /**
+     * Метод сортирует массив Person в порядке: по полу (первые MAN), ворзрасту, имени (по алфавиту)
+     *
+     * @return people - отсортированный массив
+     * @throws Exception - если имена совпадают 
+     */
+    @Override
+    public Person[] sort() throws Exception {
+        sortSex(people);
+        for (int j = people.length - 1; j >= 1; j--) {
+            for (int i = 0; i < j; i++) {
+                if (people[i].getSex().compareTo(people[i + 1].getSex()) == 0 | people[i].getSex() == Sex.MAN) {
+                    if (Integer.valueOf(people[i].getAge()).compareTo(Integer.valueOf(people[i + 1].getAge())) == 0)
+//                        (people[i].getAge() == (people[i + 1].getAge()))
+                    {
+                        if (people[i].getName().compareTo(people[i + 1].getName()) == 0) {
+                            throw new Exception();
                         }
-                        else if (people[i].getName().compareTo(people[j].getName()) < 0){
-                            toSwap(j, i);
-                        }
-                        break;
+                        toSwap(i, i + 1);
+                        return people;
+                    } else if (people[i].getAge() < (people[i + 1].getAge())) {
+                        toSwap(i, i + 1);
+                        return people;
+                    } else {
+                        return people;
+                    }
                 }
+                toSwap(i, i + 1);
+                return people;
             }
             System.out.println(people[j].toString());
         }
+        return people;
     }
 
+    public void printPerson() {
+        for (int i = 0; i < people.length; i++) {
+            System.out.println(people[i]);
+        }
+    }
+
+    /**
+     * Метод сортирует массив Person по возрасту
+     *
+     * @param people - массив Person
+     * @return - отсортированный массив Person
+     */
     public Person[] sortAge(Person[] people) {
-        for (int j = people.length-1; j >=1; j--) {
+        for (int j = people.length - 1; j >= 1; j--) {
             for (int i = 0; i < j; i++) {
-                if(people[i].getAge() < people[i+1].getAge()){
-                    toSwap(i, i+1);
+                if (people[i].getAge() < people[i + 1].getAge()) {
+                    toSwap(i, i + 1);
                 }
             }
             System.out.println(people[j].toString());
@@ -53,7 +73,13 @@ public class SortBuble implements Sortable {
         return people;
     }
 
-    public Person[] sortName (Person [] people){
+    /**
+     * Метод сортирует массив Person по имени
+     *
+     * @param people - массив Person
+     * @return - отсортированный массив Person
+     */
+    public Person[] sortName(Person[] people) {
         for (int j = 0; j < people.length; j++) {
             for (int i = j + 1; i < people.length; i++) {
                 if (people[i].getName().compareTo(people[j].getName()) < 0) {
@@ -65,11 +91,17 @@ public class SortBuble implements Sortable {
         return people;
     }
 
+    /**
+     * Метод сортирует массив Person по полу
+     *
+     * @param people - массив Person
+     * @return - отсортированный массив Person
+     */
     public Person[] sortSex(Person[] people) {
         for (int j = 0; j < people.length; j++) {
             for (int i = j + 1; i < people.length; i++) {
                 if (people[i].getSex() == Sex.MAN) {
-                    toSwap(j,i);
+                    toSwap(j, i);
                 }
             }
             System.out.println(people[j].toString());
@@ -77,35 +109,25 @@ public class SortBuble implements Sortable {
         return people;
     }
 
-    private void toSwap(int first, int second){
+    /**
+     * метод меняет местами индексы элементов в массиве
+     *
+     * @param first  первый индекс
+     * @param second второй индекс
+     */
+    private void toSwap(int first, int second) {
         Person temp = people[first];
         people[first] = people[second];
         people[second] = temp;
     }
+
+    @Override
+    public int compare(Object o, Object t1) {
+        return 0;
+    }
 }
 
 
-/**
- * //        for (int j = people.length-1; j >=1; j--) {
- * //            for (int i = 0; i < j; i++) {
- * ////                sortByName.compare(people[i].getName(people[i]), people[i].getName(people[i]));
- * //
- * //                if(people[i].getName().compareTo(people[i+1].getName() == -1)
- * //                {
- * ////                    Arrays.sort(people);
- * //                    toSwap(i, i+1);
- * //                }
- * ////                else if (people[i].getName(people[i]).compareTo(people[i+1].getName(people[i+1])) ==1){
- * ////                    toSwap(i+1, i);
- * ////                }
- * //            }
- * //            System.out.println(people[j].getName()+" "+ people[j].getAge()+" "+ people[j].getSex());
- * //        }
- * //
- * //        Arrays.sort(people, new SortByName());
- * //        for (int j = 0; j<people.length; j++) {
- * //            System.out.println(people[j].getName(people[j]));
- * //        }
- */
+
 
 

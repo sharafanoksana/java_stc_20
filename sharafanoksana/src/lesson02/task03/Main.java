@@ -15,7 +15,7 @@ import java.util.Arrays;
  * -первые идут мужчины
  * -выше в списке тот, кто более старший
  * -имена сортируются по алфавиту
- * <p>
+ *
  * Программа должна вывести на экран отсортированный список и время работы каждого алгоритма сортировки.
  * Предусмотреть генерацию исходного массива (10000 элементов и более).
  * Если имена людей и возраст совпадают, выбрасывать в программе пользовательское исключение.
@@ -24,7 +24,7 @@ import java.util.Arrays;
 public class Main {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         //Замер времени выполнения программы сортировки - старт
         long startTime = System.currentTimeMillis();
 
@@ -42,28 +42,25 @@ public class Main {
             people[i] = new Person();
         }
 
-        // Создание экземпляра класса SortByPersons
-        SortByPersons comparator = new SortByPersons();
-        /**
-         * Вызов метода сортировки массива Person
-         * @param people - массив Person
-         * @param comparator - экземпляра класса SortByPersons
-         */
-        Arrays.sort(people, comparator);
-        for (int i = 0; i < people.length; i++) {
-            System.out.println(people[i].toString());
-        }
+//        // Создание экземпляра класса SortByPersons и старт SortByPersons
+//        SortByPersons comparator = new SortByPersons();
+//        /**
+//         * Вызов метода сортировки массива Person через ava.util.Arrays
+//         * @param people - массив Person
+//         * @param comparator - экземпляра класса SortByPersons
+//         */
+//        Arrays.sort(people, comparator);
+//        for (int i = 0; i < people.length; i++) {
+//            System.out.println(people[i].toString());
+//        }
+
 
         /**
-         * Неудачная попытка с SortBuble
+         * Старт SortBuble
          */
-//        SortBuble sortBuble = new SortBuble(people);
-//        try {
-//            sortBuble.sort();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        sortBuble.printPerson();
+        SortBuble sortBuble = new SortBuble(people);
+        sortBuble.sort();
+        sortBuble.printPerson();
 
         //Замер времени выполнения программы сортировки - завершение
         long stopTime = System.currentTimeMillis();

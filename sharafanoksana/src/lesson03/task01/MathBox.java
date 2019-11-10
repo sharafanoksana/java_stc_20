@@ -4,15 +4,14 @@
  * @package lesson03.task01
  */
 package lesson03.task01;
-
+import lesson03.task02.ObjectBox;
 import java.util.*;
 
 /**
  * Класс содержит объект коллекции ArrayList<Number>
  */
 public class MathBox {
-    private List<Number> listNumber;
-
+    private final List<Number> listNumber;
 
     /**
      * Конструктор на вход получает массив Number. Элементы не могут повторяться.
@@ -21,62 +20,11 @@ public class MathBox {
      * @param numbers - массив Number
      */
     public MathBox(Number[] numbers) {
-        nambersToDuble(numbers);
         this.listNumber = new ArrayList<Number>(Arrays.asList(numbers));
         Set<? extends Number> set = new HashSet<Number>(this.listNumber);
         this.listNumber.clear();
         this.listNumber.addAll(set);
-//        checkArray(this.listNumber);
     }
-
-    public static Number[] nambersToDuble(Number[] numbers) {
-        for (int i = 0; i<numbers.length; i++){
-            numbers[i].doubleValue();
-        }
-        return numbers;
-    }
-
-    /** 2 вариант решения - метод создает дубликат из повторяющихся элементов
-     public MathBox(Number[] numbers) {
-     this.listNumber = getDuplicate(new ArrayList<Number>(Arrays.asList(numbers)));
-     }
-
-     public static <T> List getDuplicate(Collection<T> list) {
-
-     final List<T> duplicatedObjects = new ArrayList<T>();
-     Set<T> set = new HashSet<T>() {
-    @Override
-    public boolean add(T e) {
-    if (contains(e)) {
-    duplicatedObjects.add(e);
-    }
-    return super.add(e);
-    }
-    };
-     for (T t : list) {
-     set.add(t);
-     }
-     return duplicatedObjects;
-     }
-
-
-     public static <T> boolean hasDuplicate(Collection<T> list) {
-     if (getDuplicate(list).isEmpty())
-     return false;
-     return true;
-     }
-     */
-
-// 1 вариант решения
-//
-//    private List<Number> checkArray(List<Number> numbers) {
-//        for (Iterator<? extends Number> iter = this.listNumber.iterator(); iter.hasNext();){
-//            if (iter.next().equals(iter.hasNext())){
-//                iter.remove();
-//            }
-//        }
-//        return this.listNumber;
-//    }
 
     /**
      * метод подсчитывает сумму всех элементов коллекции.
@@ -90,6 +38,12 @@ public class MathBox {
         return summ;
     }
 
+    /**
+     * метод выполняет поочередное деление всех хранящихся в объекте элементов на делитель <>divider</>,
+     * Хранящиеся в объекте данные полностью заменяются результатами деления.
+     * @param divider - делитель
+     * @return - обновленный список
+     */
     public List<? extends Number> spliter(double divider) {
         for (Number element : this.listNumber) {
             int index = this.listNumber.indexOf(element);
@@ -99,7 +53,12 @@ public class MathBox {
         return this.listNumber;
     }
 
-    public List<? extends Number> checkValue(Number value) {
+    /**
+     * метод получает на вход Integer и если такое значение есть в коллекции, удаляет его.
+     * @param value - сравниваемое значение
+     * @return измененный this.listNumber, если элемент был удален
+     */
+    public List<? extends Number> checkValue(Integer value) {
         System.out.println("Коллекция содержит елемент? " + value + " - " + this.listNumber.contains(value));
         for (Iterator<? extends Number> iter = this.listNumber.iterator(); iter.hasNext();){
             if (iter.next().equals(value)){
@@ -113,9 +72,14 @@ public class MathBox {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof MathBox)) return false;
+        if (o == null || this.getClass() != o.getClass()) return false;
         MathBox mathBox = (MathBox) o;
-        return listNumber.equals(mathBox.listNumber);
+        return this.listNumber.equals(mathBox.listNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.listNumber);
     }
 
     @Override
@@ -123,10 +87,5 @@ public class MathBox {
         return "MathBox{" +
                 "listNumber=" + listNumber +
                 '}';
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(listNumber);
     }
 }

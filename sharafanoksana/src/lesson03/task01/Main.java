@@ -20,35 +20,23 @@ package lesson03.task01;
 
 public class Main {
     public static void main(String[] args) {
-        int quantity = 10;
-//        Number[] numbers = new Number[quantity];
-        Number[] numbers = {2, 3, 4, 5.0, 5,  6, 7, 8, 8, 9, 10};
-//        for (int i = 0; i<numbers.length; i++){
-//            numbers[i] = (Double)numbers[i]*1.0;
-//            System.out.println(numbers[i]);
-//        }
+        Number[] numbers = {1,2,3,4,5,6,6,7,8,9,10,2.5,4};
 
-
-        Number value = 2.5; // проверяемое значение
+        Integer value = 2; // проверяемое значение
         double divider = 4; // делитель
 
         MathBox mathBox = new MathBox(numbers);
-
-
+        System.out.println("Создан объект класса MathBox");
         System.out.println(mathBox.toString());
+        System.out.println("Вызван метод summator()");
         System.out.println(mathBox.summator());
+        System.out.println("Вызван метод checkValue() с параметром " + value);
         mathBox.checkValue(value);
         System.out.println(mathBox.toString());
-
-
+        System.out.println("Вызван метод spliter() с параметром " + divider);
         mathBox.spliter(divider);
         System.out.println(mathBox.toString());
-
+        System.out.println("Вызван метод summator()");
         System.out.println(mathBox.summator());
-
-        MathBox mathBox1 = new MathBox(numbers);
-
-        mathBox.checkValue(value);
-        System.out.println(mathBox.toString());
     }
 }

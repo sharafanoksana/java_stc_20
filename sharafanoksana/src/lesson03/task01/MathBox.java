@@ -7,11 +7,25 @@ package lesson03.task01;
 import lesson03.task02.ObjectBox;
 import java.util.*;
 
+import static java.lang.Double.*;
+/**
+ * Задание 1. Написать класс MathBox, реализующий следующий функционал:
+ * -    Конструктор на вход получает массив Number. Элементы не могут повторяться. Элементы массива внутри объекта
+ * раскладываются в подходящую коллекцию (выбрать самостоятельно).
+ * -    Существует метод summator, возвращающий сумму всех элементов коллекции.
+ * -    Существует метод splitter, выполняющий поочередное деление всех хранящихся в объекте элементов на делитель,
+ * являющийся аргументом метода. Хранящиеся в объекте данные полностью заменяются результатами деления.
+ * -    Необходимо правильно переопределить методы toString, hashCode, equals, чтобы можно было использовать MathBox
+ * для вывода данных на экран и хранение объектов этого класса в коллекциях (например, hashMap). Выполнение
+ * контракта обязательно!
+ * -    Создать метод, который получает на вход Integer и если такое значение есть в коллекции, удаляет его.
+ */
+
 /**
  * Класс содержит объект коллекции ArrayList<Number>
  */
-public class MathBox {
-    private final List<Number> listNumber;
+public class MathBox extends ObjectBox {
+    private List<Number> listNumber;
 
     /**
      * Конструктор на вход получает массив Number. Элементы не могут повторяться.
@@ -20,6 +34,7 @@ public class MathBox {
      * @param numbers - массив Number
      */
     public MathBox(Number[] numbers) {
+        super(numbers);
         this.listNumber = new ArrayList<Number>(Arrays.asList(numbers));
         Set<? extends Number> set = new HashSet<Number>(this.listNumber);
         this.listNumber.clear();
@@ -47,8 +62,9 @@ public class MathBox {
     public List<? extends Number> spliter(double divider) {
         for (Number element : this.listNumber) {
             int index = this.listNumber.indexOf(element);
-            element = element.doubleValue() / divider;
-            this.listNumber.set(index, element);
+            double elem = Double.valueOf(String.valueOf(element));
+            elem = elem / divider;
+            this.listNumber.set(index, elem);
         }
         return this.listNumber;
     }
@@ -66,6 +82,10 @@ public class MathBox {
                 System.out.println("Элемент: " + value + " - удален!");
             }
         }
+        return this.listNumber;
+    }
+
+    public List<Number> getListNumber() {
         return this.listNumber;
     }
 

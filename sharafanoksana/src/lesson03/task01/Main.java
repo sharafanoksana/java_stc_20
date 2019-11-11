@@ -5,6 +5,11 @@
  */
 package lesson03.task01;
 
+import lesson03.task02.ObjectBox;
+import org.w3c.dom.ls.LSOutput;
+
+import java.util.List;
+
 /**
  * Задание 1. Написать класс MathBox, реализующий следующий функционал:
  * -    Конструктор на вход получает массив Number. Элементы не могут повторяться. Элементы массива внутри объекта

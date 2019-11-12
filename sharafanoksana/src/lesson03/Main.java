@@ -3,8 +3,9 @@
  * @date 06.11.2019
  * @package lesson03.task01
  */
-package lesson03.task01;
+package lesson03;
 
+import lesson03.task01.MathBox;
 import lesson03.task02.ObjectBox;
 import org.w3c.dom.ls.LSOutput;
 

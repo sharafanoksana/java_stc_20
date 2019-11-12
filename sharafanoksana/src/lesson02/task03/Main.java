@@ -42,30 +42,30 @@ public class Main {
             people[i] = new Person();
         }
 
-//        // Создание экземпляра класса SortByPersons и старт SortByPersons
-//        SortByPersons comparator = new SortByPersons();
-//        /**
-//         * Вызов метода сортировки массива Person через ava.util.Arrays
-//         * @param people - массив Person
-//         * @param comparator - экземпляра класса SortByPersons
-//         */
-//        Arrays.sort(people, comparator);
-//        for (int i = 0; i < people.length; i++) {
-//            System.out.println(people[i].toString());
-//        }
-
-
+        // Создание экземпляра класса SortByPersons и старт SortByPersons
+        SortByPersons comparator = new SortByPersons();
         /**
-         * Старт SortBuble
+         * Вызов метода сортировки массива Person через ava.util.Arrays
+         * @param people - массив Person
+         * @param comparator - экземпляра класса SortByPersons
          */
-        SortBuble sortBuble = new SortBuble(people);
-        sortBuble.sort();
-        sortBuble.printPerson();
+        Arrays.sort(people, comparator);
+        for (int i = 0; i < people.length; i++) {
+            System.out.println(people[i].toString());
+        }
 
-        //Замер времени выполнения программы сортировки - завершение
-        long stopTime = System.currentTimeMillis();
-        long elapsedTime = stopTime - startTime;
-        System.out.println(elapsedTime);
+
+//        /**
+//         * Старт SortBuble
+//         */
+//        SortBuble sortBuble = new SortBuble(people);
+//        sortBuble.sort();
+//        sortBuble.printPerson();
+//
+//        //Замер времени выполнения программы сортировки - завершение
+//        long stopTime = System.currentTimeMillis();
+//        long elapsedTime = stopTime - startTime;
+//        System.out.println(elapsedTime);
 
 
 

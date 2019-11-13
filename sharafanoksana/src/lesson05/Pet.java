@@ -6,15 +6,17 @@
 package lesson05;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class Pet {
-    private int id;
+    final private int id;
     private String nickname;
     private Person owner;
     private double weight;
 
-    public Pet(int id, String nickname, Person owner, double weight) {
-        this.id = id;
+    public Pet(String nickname, Person owner, double weight) {
+        Random random = new Random();
+        id = random.nextInt(1000);
         this.nickname = nickname;
         this.owner = owner;
         this.weight = weight;

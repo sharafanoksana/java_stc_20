@@ -9,7 +9,17 @@ import lesson02.task03.SortException;
 
 import java.util.Comparator;
 
-public class ComparePets implements Comparator<Pet>{
+public class ComparePets implements Comparator<Pet> {
+    /**
+     * Метод сортирует PetCollection в следующем порядке по полям:
+     * 1 - владелец
+     * 2 - кличка животного
+     * 3 - вес животного
+     *
+     * @param p1 - питомец 1
+     * @param p2 - питомец 2
+     * @return - возвращает отсортированные значения
+     */
     @Override
     public int compare(Pet p1, Pet p2) {
         int value1 = p1.getOwner().getName().compareTo(p2.getOwner().getName());

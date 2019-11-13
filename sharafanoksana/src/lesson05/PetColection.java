@@ -28,34 +28,39 @@ public class PetColection {
     /**
      * поиск животного по его кличке (поиск должен быть эффективным)
      */
-    public void nicknameSearch(String nickname) {
+    public void nicknameSearch() {
         boolean b = false;
+        System.out.println("Поиск питомца по кличке.\nВведите кличку животного:");
+        Scanner scanner = new Scanner(System.in);
+        String nickname = scanner.next();
         System.out.println("Запущен поиск питомца по кличке: " + nickname);
-        for (Iterator<Pet> it = pets.iterator(); it.hasNext();){
+        for (Iterator<Pet> it = pets.iterator(); it.hasNext(); ) {
             Pet pet = it.next();
-            if (pet.getNickname().equals(nickname)){
+            if (pet.getNickname().equals(nickname)) {
                 b = true;
                 System.out.println("Найдено совпадение: " + pet.toString());
             }
         }
-        if (b == false){
+        if (b == false) {
             System.out.println("Совпадений не найдено!");
         }
     }
 
     /**
      * изменение данных животного по его идентификатору
+     *
      * @return
      */
-    public void changeDataByID(int id) {
-        System.out.println("Изменение данных животного по идентификатору: " + id);
+    public void changeWeghtByID() {
+        System.out.println("Изменение данных животного по идентификатору. \nВведите id питомца:");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
         Pet petcheng = null;
-        for (Iterator<Pet> it = pets.iterator(); it.hasNext();){
+        for (Iterator<Pet> it = pets.iterator(); it.hasNext(); ) {
             petcheng = it.next();
-            if (petcheng.getId()==id){
+            if (petcheng.getId() == id) {
                 System.out.println("Найдено совпадение по id: " + petcheng.toString());
                 System.out.println("Введите новый вес животного");
-                Scanner scanner = new Scanner(System.in);
                 Double newWeight = scanner.nextDouble();
                 petcheng.setWeight(newWeight);
                 scanner.close();
@@ -68,11 +73,13 @@ public class PetColection {
      * вывод на экран списка животных в отсортированном порядке. Поля для сортировки –  хозяин, кличка животного, вес.
      */
     public void printList() {
+        System.out.println("Вывод на экран списка животных в отсортированном порядке. " +
+                "Поля для сортировки –  хозяин, кличка животного, вес:");
         ComparePets comparator = new ComparePets();
         ArrayList<Pet> petArrayList = new ArrayList<>();
         petArrayList.addAll(pets);
         Collections.sort(petArrayList, comparator);
-        for (Pet set: petArrayList){
+        for (Pet set : petArrayList) {
             System.out.println(set);
         }
     }

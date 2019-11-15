@@ -17,16 +17,13 @@ package lesson06.task2;
  *      перенос каретки.
  * -    Есть массив слов 1<=n4<=1000. Есть вероятность probability вхождения одного из слов этого массива в
  *      следующее предложение (1/probability).
- * -    Необходимо написать метод getFiles(String path, int n, int size, String[] words, int probability),
+ * -    Необходимо написать метод getFiles(String path, int n, int size, String[] words, int probability), todo
  *      который создаст n файлов размером size в каталоге path. words - массив слов, probability - вероятность.
  */
 public class Main {
     public static void main(String[] args) {
-        GeneratorOfText gt = new GeneratorOfText();
-        gt.creatDistionary();
-        gt.creatSentence();
-        gt.punctuationInsert();
-        gt.creatParagraph();
-//        gt.toString();
+        Paragraph p = new Paragraph();
+        p.createListParagraf();
+        System.out.println(p.getParagraph());
     }
 }

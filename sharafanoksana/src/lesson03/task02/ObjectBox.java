@@ -14,10 +14,10 @@ import java.util.*;
  * Должен быть метод dump, выводящий содержимое коллекции в строку.
   */
 public class ObjectBox {
-    protected ArrayList<Number> listObj;
+    protected List<Number> listObj;
 
     public <Object> ObjectBox(Object[] objects) {
-        this.listObj = new ArrayList<Number>((Collection<? extends Number>) Arrays.asList(objects));
+        this.listObj = new ArrayList<>((Collection<? extends Number>) Arrays.asList(objects));
     }
 
     /**

@@ -4,10 +4,10 @@
  * @package lesson03.task01
  */
 package lesson03.task01;
-import lesson03.task02.ObjectBox;
-import java.util.*;
 
-import static java.lang.Double.*;
+import lesson03.task02.ObjectBox;
+
+import java.util.*;
 /**
  * Задание 1. Написать класс MathBox, реализующий следующий функционал:
  * -    Конструктор на вход получает массив Number. Элементы не могут повторяться. Элементы массива внутри объекта
@@ -35,8 +35,8 @@ public class MathBox extends ObjectBox {
      */
     public MathBox(Number[] numbers) {
         super(numbers);
-        this.listNumber = new ArrayList<Number>(Arrays.asList(numbers));
-        Set<? extends Number> set = new HashSet<Number>(this.listNumber);
+        this.listNumber = new ArrayList<>(Arrays.asList(numbers));
+        Set<? extends Number> set = new HashSet<>(this.listNumber);
         this.listNumber.clear();
         this.listNumber.addAll(set);
     }
@@ -76,6 +76,9 @@ public class MathBox extends ObjectBox {
      */
     public List<? extends Number> checkValue(Integer value) {
         System.out.println("Коллекция содержит елемент? " + value + " - " + this.listNumber.contains(value));
+//        if(listNumber.contains(value)){
+//                listNumber.remove(listNumber.indexOf(value)); //todo : исправить код
+//        }
         for (Iterator<? extends Number> iter = this.listNumber.iterator(); iter.hasNext();){
             if (iter.next().equals(value)){
                 iter.remove();

@@ -26,8 +26,11 @@ public class Dictionary {
                 BufferedReader br = new BufferedReader(isr)) {
             while ((line = br.readLine()) != null) {
                 String[] wordArray = line.split("[\\p{IsPunctuation}\\p{IsWhite_Space}]+");
-                 for (String elem: wordArray){
-                    words.add(elem.toLowerCase());
+                for (String elem : wordArray) {
+                    if (!elem.equals("")) {
+                        words.add(elem.toLowerCase());
+                    }
+
                 }
             }
         } catch (Exception ex) {
@@ -39,10 +42,10 @@ public class Dictionary {
      * Метод считывает соллекцию Set<String> words и записывает слова в файл dectionary.txt. Файл dectionary.txt
      * всегда перезаписывается
      */
-    public void saveWordsToFile(){
-        try(Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("dectionary.txt"),"UTF-8"));
+    public void saveWordsToFile() {
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("dectionary.txt"), "UTF-8"));
         ) {
-            for (String elem: words){
+            for (String elem : words) {
                 writer.write(elem + "\n");
             }
         } catch (UnsupportedEncodingException e) {
@@ -51,12 +54,12 @@ public class Dictionary {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             System.out.println("Запись в файл \"dectionary.txt\" создана");
         }
     }
 
-    public void print(){
+    public void print() {
         System.out.println(words.toString());
         System.out.println(words.size());
     }

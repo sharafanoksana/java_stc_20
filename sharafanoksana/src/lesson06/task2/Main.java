@@ -22,6 +22,11 @@ package lesson06.task2;
  */
 public class Main {
     public static void main(String[] args) {
-
+        GeneratorOfText gt = new GeneratorOfText();
+        gt.creatDistionary();
+        gt.creatSentence();
+        gt.punctuationInsert();
+        gt.creatParagraph();
+//        gt.toString();
     }
 }

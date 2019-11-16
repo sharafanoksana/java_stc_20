@@ -9,28 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Sentence {
-    private List<String> words = new ArrayList<>();
+class Sentence extends Word{
+    private List<String> words= new ArrayList<>();
     private List<String> arrayWords = new ArrayList<>();
     private String sentence = "";
 
-    public Sentence() {
-        this.words = words;
-        this.arrayWords = arrayWords;
-        this.sentence = sentence;
-    }
+//    public Sentence(List<String> words) {
+//        this.words = words;
+//    }
 
     /**
      * Метод генерирует список слов. Слово состоит из 1<=n2<=15 латинских букв
      *
-     * @return
      */
-    List<String> creatDistionary() {
-
+    void creatDistionary() {
         for (int i = 0; i < 1000; i++) {
             this.words.add(new Word().toString());
         }
-        return this.words;
     }
 
     /**
@@ -41,7 +36,7 @@ public class Sentence {
     private List<String> getWordForSentence() {
         int lenghtSentence = getRandom(1, 15);
         for (int i = 0; i < lenghtSentence; i++) {
-            String sentence = new StringBuilder().append(words.get(getRandom(0, 1000))).append(" ").toString();
+            String sentence = words.get(super.getRandom(0, 1000)) + " ";
             this.arrayWords.add(sentence);
         }
         punctuationInsert();
@@ -53,9 +48,8 @@ public class Sentence {
      *
      * @return строка предложения
      */
-    public String getSentence() {
-        String sentence = String.join("", getWordForSentence());
-        return sentence;
+    String getSentence() {
+        return String.join("", getWordForSentence());
     }
 
     /**
@@ -64,9 +58,8 @@ public class Sentence {
      * в середине в элемент предложения рандомно вставляются знаки припенания,
      * последний елемент предложения заканчивается знаком припенания по рандомному выбору.
      *
-     * @return arrayWords
      */
-    private List<String> punctuationInsert() {
+    private void punctuationInsert() {
         // Обработка первого слова в предложении
         int sizeCentence = this.arrayWords.size() - 1;
         String first = this.arrayWords.get(0).substring(0, 1).toUpperCase() + this.arrayWords.get(0).substring(1);
@@ -88,7 +81,6 @@ public class Sentence {
         this.arrayWords.remove(sizeCentence);
         this.arrayWords.add(sizeCentence, last);
 
-        return this.arrayWords;
     }
 
     /**
@@ -139,11 +131,5 @@ public class Sentence {
                 break;
         }
         return valMiddle;
-    }
-
-    private int getRandom(int min, int max) {
-        Random random = new Random();
-        int elemLenght = min + random.nextInt(max - min + 1);
-        return elemLenght;
     }
 }

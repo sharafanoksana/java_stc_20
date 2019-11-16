@@ -13,20 +13,14 @@ public class Word implements Serializable {
     private static final long serialVersionUID = 1;
     private String word;
 
-    public Word() {
+    Word() {
         this.word = generateWord();
-    }
-
-    public String getWord() {
-        return this.word;
     }
 
     private String generateWord(){
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
         Random random = new Random();
-        int min = 2;
-        int max = 15;
-        int wordLenght = min + random.nextInt(max - min + 1);
+        int wordLenght = getRandom(2, 15);
         int lenAlphabet = alphabet.length();
         StringBuilder sb = new StringBuilder(wordLenght);
         for (int i = 0; i < wordLenght; i++) {
@@ -37,6 +31,10 @@ public class Word implements Serializable {
         return sb.toString();
     }
 
+    int getRandom(int min, int max) {
+        Random random = new Random();
+        return min + random.nextInt(max - min + 1);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

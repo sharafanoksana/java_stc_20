@@ -22,8 +22,13 @@ package lesson06.task2;
  */
 public class Main {
     public static void main(String[] args) {
-        Paragraph p = new Paragraph();
-        p.createListParagraf();
-        System.out.println(p.getParagraph());
+//        List<String> words = new ArrayList<>();
+//        for (int i = 0; i < 1000; i++) {
+//            words.add(new Word().toString());
+//        }
+
+        Text t = new Text();
+        t.createListText();
+        System.out.println(t.toString());
     }
 }

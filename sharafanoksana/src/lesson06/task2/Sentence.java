@@ -7,16 +7,15 @@ package lesson06.task2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-class Sentence extends Word{
+
+class Sentence{
     private List<String> words= new ArrayList<>();
     private List<String> arrayWords = new ArrayList<>();
-    private String sentence = "";
 
-//    public Sentence(List<String> words) {
-//        this.words = words;
-//    }
+    public Sentence() {
+        creatDistionary();
+    }
 
     /**
      * Метод генерирует список слов. Слово состоит из 1<=n2<=15 латинских букв
@@ -34,9 +33,9 @@ class Sentence extends Word{
      * @return возвращает список слов для составления предложения
      */
     private List<String> getWordForSentence() {
-        int lenghtSentence = getRandom(1, 15);
+        int lenghtSentence = RandomNumberGenerator.getRandom(1, 15);
         for (int i = 0; i < lenghtSentence; i++) {
-            String sentence = words.get(super.getRandom(0, 1000)) + " ";
+            String sentence = words.get(RandomNumberGenerator.getRandom(0, 1000)) + " ";
             this.arrayWords.add(sentence);
         }
         punctuationInsert();
@@ -68,19 +67,17 @@ class Sentence extends Word{
 
         // Обработка слов в середине предложения
         if (sizeCentence > 2) {
-            for (int i = 0; i < getRandom(1, (sizeCentence / 4) + 1); i++) {
-                int idxMid = getRandom(0, sizeCentence - 1);
+            for (int i = 0; i < RandomNumberGenerator.getRandom(1, (sizeCentence / 6) + 1); i++) {
+                int idxMid = RandomNumberGenerator.getRandom(0, sizeCentence - 1);
                 String middle = this.arrayWords.get(idxMid).trim() + getPunctuationMidlle();
                 this.arrayWords.add(idxMid, middle);
                 this.arrayWords.remove(idxMid + 1);
             }
         }
-
         // Обработка слов в конце предложения
         String last = this.arrayWords.get(sizeCentence).trim() + getPunctuationEnd();
         this.arrayWords.remove(sizeCentence);
         this.arrayWords.add(sizeCentence, last);
-
     }
 
     /**
@@ -90,7 +87,7 @@ class Sentence extends Word{
      */
     private String getPunctuationEnd() {
         String valEnd = "";
-        int elem = getRandom(0, 2);
+        int elem = RandomNumberGenerator.getRandom(0, 2);
         switch (elem) {
             case 0:
                 valEnd = "? ";
@@ -112,7 +109,7 @@ class Sentence extends Word{
      */
     private String getPunctuationMidlle() {
         String valMiddle = "";
-        int elem = getRandom(0, 4);
+        int elem = RandomNumberGenerator.getRandom(0, 5);
         switch (elem) {
             case 0:
                 valMiddle = ", ";
@@ -127,6 +124,9 @@ class Sentence extends Word{
                 valMiddle = " - ";
                 break;
             case 4:
+                valMiddle = ", ";
+                break;
+            case 5:
                 valMiddle = "; ";
                 break;
         }

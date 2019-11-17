@@ -8,21 +8,17 @@ package lesson06.task2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Text extends Paragraph {
+public class Text{
     private List<String> textList = new ArrayList<>();
     private String text = "";
 
     public Text() {
+        createListText();
     }
-//
-//    Text(List<String> words) {
-//        this.text = text;
-//    }
 
     void createListText() {
-        for (int i = 0; i < getRandom(1, 20); i++) {
+        for (int i = 0; i < RandomNumberGenerator.getRandom(1, 20); i++) {
             Paragraph p = new Paragraph();
-            p.createListParagraph();
             this.textList.add(p.getParagraph());
         }
         mergeIntoString();

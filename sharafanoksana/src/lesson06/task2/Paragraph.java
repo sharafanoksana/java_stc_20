@@ -7,23 +7,22 @@ package lesson06.task2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class Paragraph extends Sentence{
+
+public class Paragraph{
     private List<String> paragraphs = new ArrayList<>();
-    private String paragraph = "";
 
     Paragraph() {
+        createListParagraph();
     }
 
     /**
      *  -    Текст состоит из абзацев. в одном абзаце 1<=n3<=20 предложений. В конце абзаца стоит разрыв строки и
      *       перенос каретки.
      */
-    void createListParagraph() {
-        for (int i = 0; i < getRandom(1, 20); i++) {
+    private void createListParagraph() {
+        for (int i = 0; i < RandomNumberGenerator.getRandom(1, 20); i++) {
             Sentence s = new Sentence();
-            s.creatDistionary();
             this.paragraphs.add(s.getSentence());
         }
         insertMetaElem();

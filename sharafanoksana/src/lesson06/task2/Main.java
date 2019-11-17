@@ -28,7 +28,6 @@ public class Main {
 //        }
 
         Text t = new Text();
-        t.createListText();
         System.out.println(t.toString());
     }
 }

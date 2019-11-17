@@ -9,17 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class Sentence{
+class SentenceFactory {
     private List<String> words= new ArrayList<>();
     private List<String> arrayWords = new ArrayList<>();
 
-    public Sentence() {
+    /**
+     * В конструкторе вызывается метод для создания словаря
+     */
+    public SentenceFactory() {
         creatDistionary();
     }
 
     /**
      * Метод генерирует список слов. Слово состоит из 1<=n2<=15 латинских букв
-     *
      */
     void creatDistionary() {
         for (int i = 0; i < 1000; i++) {
@@ -29,13 +31,12 @@ class Sentence{
 
     /**
      * Предложение состоит из 1<=n1<=15 слов. В предложении после произвольных слов могут находиться запятые.
-     *
      * @return возвращает список слов для составления предложения
      */
     private List<String> getWordForSentence() {
         int lenghtSentence = RandomNumberGenerator.getRandom(1, 15);
         for (int i = 0; i < lenghtSentence; i++) {
-            String sentence = words.get(RandomNumberGenerator.getRandom(0, 1000)) + " ";
+            String sentence = words.get(RandomNumberGenerator.getRandom(0, 999)) + " ";
             this.arrayWords.add(sentence);
         }
         punctuationInsert();
@@ -43,8 +44,7 @@ class Sentence{
     }
 
     /**
-     * Метод создает предложение из списка отформатированных слов
-     *
+     * Метод "склеивает" предложение из списка отформатированных слов
      * @return строка предложения
      */
     String getSentence() {

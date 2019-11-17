@@ -8,6 +8,12 @@ package lesson06.task2;
 import java.util.Random;
 
 public class RandomNumberGenerator {
+    /**
+     * Метод генерирует случайное число в заданном диапазоне
+     * @param min минимальное число диапазона
+     * @param max максимальное число диапазона
+     * @return возвращает случайной число из заданного диапазона
+     */
     static int getRandom(int min, int max) {
         Random random = new Random();
         return min + random.nextInt(max - min + 1);

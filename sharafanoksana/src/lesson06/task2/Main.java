@@ -5,6 +5,10 @@
  */
 package lesson06.task2;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Задание 2. Создать генератор текстовых файлов, работающий по следующим правилам:
  *
@@ -17,17 +21,19 @@ package lesson06.task2;
  *      перенос каретки.
  * -    Есть массив слов 1<=n4<=1000. Есть вероятность probability вхождения одного из слов этого массива в
  *      следующее предложение (1/probability).
- * -    Необходимо написать метод getFiles(String path, int n, int size, String[] words, int probability), todo
+ * -    Необходимо написать метод getFiles(String path, int n, int size, String[] words, int probability),
  *      который создаст n файлов размером size в каталоге path. words - массив слов, probability - вероятность.
  */
 public class Main {
     public static void main(String[] args) {
-//        List<String> words = new ArrayList<>();
-//        for (int i = 0; i < 1000; i++) {
-//            words.add(new Word().toString());
-//        }
+        String[] words = new String[1000];
+        for (int i = 0; i < 1000; i++) {
+            words[i] = new Word().toString();
+        }
 
-        Text t = new Text();
-        System.out.println(t.toString());
+        FileFactory fileFactory = new FileFactory();
+        //Необходимо написать метод getFiles(String path, int n, int size, String[] words, int probability),
+        // который создаст n файлов размером size в каталоге path. words - массив слов, probability - вероятность
+        fileFactory.getFiles("C:\\Users\\sharafan\\IdeaProjects\\java_stc_20\\sharafanoksana\\src\\lesson06\\task2\\randomTexts",5,20);
     }
 }

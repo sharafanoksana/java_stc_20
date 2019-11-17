@@ -17,6 +17,10 @@ public class Word implements Serializable {
         this.word = generateWord();
     }
 
+    /**
+     * Метод генерирует случайное слово из латинского алфавита. Слово состоит из 1<=n2<=15 латинских букв
+     * @return
+     */
     private String generateWord(){
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
         Random random = new Random();
@@ -42,10 +46,5 @@ public class Word implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(word);
-    }
-
-    @Override
-    public String toString() {
-        return word;
     }
 }

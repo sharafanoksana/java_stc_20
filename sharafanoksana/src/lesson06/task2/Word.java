@@ -47,4 +47,9 @@ public class Word implements Serializable {
     public int hashCode() {
         return Objects.hash(word);
     }
+
+    @Override
+    public String toString() {
+        return word;
+    }
 }

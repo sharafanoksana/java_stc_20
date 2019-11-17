@@ -6,6 +6,7 @@
 package lesson06.task2;
 
 import java.io.*;
+import java.util.List;
 
 /**
  * Фабрика создания текстовых файлов
@@ -17,11 +18,11 @@ public class FileFactory {
      * Метод для создания сгенерированных текстовых файлов
      * @param path путь к директории для создания файлов
      * @param n - количество создаваемых файлов
-     * @param size - размер файлов в todo абзацах ????????????
+     * @param size - размер файлов в todo вероятность ????????????
      */
-    public void getFiles(String path, int n, int size) {
+    public void getFiles(String path, int n, int size, List<String> words) {
         for (int i = 0; i < n; i++) {
-            TextFactory textFactory = new TextFactory(size);
+            TextFactory textFactory = new TextFactory(size, words);
             String pth = path + "\\6_" + i + ".txt";
             try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(pth), "UTF-8"));
             ) {

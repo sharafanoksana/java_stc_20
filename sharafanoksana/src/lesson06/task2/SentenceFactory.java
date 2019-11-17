@@ -14,23 +14,16 @@ class SentenceFactory {
     private List<String> arrayWords = new ArrayList<>();
 
     /**
-     * В конструкторе вызывается метод для создания словаря
+     * В конструктор передается словарь для создания предложений
+     * @param words ArrayList слов
      */
-    public SentenceFactory() {
-        creatDistionary();
+    public SentenceFactory(List<String> words) {
+        this.words = words;
     }
 
     /**
      * Метод генерирует список слов. Слово состоит из 1<=n2<=15 латинских букв
-     */
-    void creatDistionary() {
-        for (int i = 0; i < 1000; i++) {
-            this.words.add(new Word().toString());
-        }
-    }
-
-    /**
-     * Предложение состоит из 1<=n1<=15 слов. В предложении после произвольных слов могут находиться запятые.
+     * В предложении после произвольных слов могут находиться запятые.
      * @return возвращает список слов для составления предложения
      */
     private List<String> getWordForSentence() {

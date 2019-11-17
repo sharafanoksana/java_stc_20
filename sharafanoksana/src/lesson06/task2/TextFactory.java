@@ -12,17 +12,22 @@ public class TextFactory {
     private List<String> textList = new ArrayList<>();
     private String text = "";
 
-    public TextFactory(int size) {
-        createListText(size);
+    /**
+     * В конструктор передается словарь для создания предложений и количество абзацев в тексте
+     * @param size количество абзацев
+     * @param words ArrayList слов
+     */
+    public TextFactory(int size, List<String> words) {
+        createListText(size, words);
     }
 
     /**
      * Метод генерирует текст из абзацев
      * @param size количество генерируемых абзацев в тексте
      */
-    void createListText(int size) {
+    void createListText(int size, List<String> words) {
         for (int i = 0; i < size; i++) {
-            ParagraphFactory p = new ParagraphFactory();
+            ParagraphFactory p = new ParagraphFactory(words);
             this.textList.add(p.getParagraph());
         }
         mergeIntoString();

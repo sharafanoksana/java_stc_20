@@ -12,16 +12,20 @@ import java.util.List;
 public class ParagraphFactory {
     private List<String> paragraphs = new ArrayList<>();
 
-    ParagraphFactory() {
-        createListParagraph();
+    /**
+     * В конструктор передается словарь для создания предложений
+     * @param words ArrayList слов
+     */
+    ParagraphFactory(List<String> words) {
+        createListParagraph(words);
     }
 
     /**
      *  Метод создает текст, который состоит из абзацев. в одном абзаце 1<=n3<=20 предложений.
      */
-    private void createListParagraph() {
+    private void createListParagraph(List<String> words) {
         for (int i = 0; i < RandomNumberGenerator.getRandom(1, 20); i++) {
-            SentenceFactory s = new SentenceFactory();
+            SentenceFactory s = new SentenceFactory(words);
             this.paragraphs.add(s.getSentence());
         }
         insertMetaElem();

@@ -14,7 +14,7 @@ public class RandomNumberGenerator {
      * @param max максимальное число диапазона
      * @return возвращает случайной число из заданного диапазона
      */
-    static int getRandom(int min, int max) {
+    public static int getRandom(int min, int max) {
         Random random = new Random();
         return min + random.nextInt(max - min + 1);
     }

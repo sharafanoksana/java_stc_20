@@ -30,7 +30,6 @@ public class Dictionary {
                     if (!elem.equals("")) {
                         words.add(elem.toLowerCase());
                     }
-
                 }
             }
         } catch (Exception ex) {

@@ -5,10 +5,10 @@
  */
 package lesson06.task2;
 
+import lesson06.task1.Dictionary;
+
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Задание 2. Создать генератор текстовых файлов, работающий по следующим правилам:
@@ -27,13 +27,11 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-
         String[] wordsArray = new String[1000];
         for (int i = 0; i < 1000; i++) {
             wordsArray[i] = new Word().toString();
         }
         List<String> words = Arrays.asList(wordsArray);
-
 
         FileFactory fileFactory = new FileFactory();
         //Необходимо написать метод getFiles(String path, int n, int size, String[] words, int probability),

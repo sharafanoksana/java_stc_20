@@ -25,13 +25,13 @@ public class MultithreadClient {
 
         long start = System.nanoTime();
 
-        List<Future<Double>> futures = new ArrayList<>();
+        List<Future<Long>> futures = new ArrayList<>();
         List<Integer> numbers = new ArrayList<>();
         int countNumbers = 100000;
         for (int k = 0; k < countNumbers; k++) {
-            numbers.add(RandomNumberGenerator.getRandom(0, 100));
+            numbers.add(RandomNumberGenerator.getRandom(0, 10));
         }
-        for (double num : numbers) {
+        for (long num : numbers) {
             /*при раскоментировании выводится полоное разложение каждого числа массива numbers на составляющие,
              подсчет их факториала с записью в future.*/
 //            for (int i = 0; i < num; i++) {
@@ -44,13 +44,14 @@ public class MultithreadClient {
 //            }
         }
 
-        for (Future<Double> future : futures) {
+
+        for (Future<Long> future : futures) {
             System.out.println(future.get());
         }
-
         System.out.printf("Executed by %d s, value", (System.nanoTime() - start) / (1000_000_000));
 
         // завершение работы программы
         threadPool.shutdown();
+        //todo
     }
 }

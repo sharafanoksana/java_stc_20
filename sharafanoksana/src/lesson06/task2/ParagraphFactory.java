@@ -15,18 +15,19 @@ public class ParagraphFactory {
     /**
      * В конструктор передается словарь для создания предложений
      * @param words ArrayList слов
+     * @param probability
      */
-    ParagraphFactory(List<String> words) {
-        createListParagraph(words);
+    ParagraphFactory(List<String> words, int probability) {
+        createListParagraph(words, probability);
     }
 
     /**
      *  Метод создает текст, который состоит из абзацев. в одном абзаце 1<=n3<=20 предложений.
      */
-    private void createListParagraph(List<String> words) {
+    private void createListParagraph(List<String> words, int probability) {
         for (int i = 0; i < RandomNumberGenerator.getRandom(1, 20); i++) {
-            SentenceFactory s = new SentenceFactory(words);
-            this.paragraphs.add(s.getSentence());
+            SentenceFactory s = new SentenceFactory(words, probability);
+            this.paragraphs.add(s.getSentence(probability));
         }
         insertMetaElem();
     }

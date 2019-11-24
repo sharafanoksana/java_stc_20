@@ -11,25 +11,27 @@ import java.util.List;
 public class TextFactory {
     private List<String> textList = new ArrayList<>();
     private String text = "";
+    private int size = 0;
+
 
     /**
      * В конструктор передается словарь для создания предложений и количество абзацев в тексте
-     * @param size количество абзацев
-     * @param words ArrayList слов
+     *  @param words       ArrayList слов
+     * @param probability вероятность вхождения слов
      */
-    public TextFactory(int size, List<String> words) {
-        createListText(size, words);
+    public TextFactory(List<String> words, int probability) {
+        createListText(words, probability);
     }
 
     /**
      * Метод генерирует текст из абзацев
-     * @param size количество генерируемых абзацев в тексте
+     * количество генерируемых абзацев в тексте 1 - 20
      */
-    void createListText(int size, List<String> words) {
-        for (int i = 0; i < size; i++) {
-            ParagraphFactory p = new ParagraphFactory(words);
-            this.textList.add(p.getParagraph());
-        }
+    void createListText(List<String> words, int probability) {
+            for (int i = 0; i < RandomNumberGenerator.getRandom(1, 20); i++) {
+                ParagraphFactory p = new ParagraphFactory(words, probability);
+                this.textList.add(p.getParagraph());
+            }
         mergeIntoString();
     }
 

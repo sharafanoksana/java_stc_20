@@ -5,6 +5,7 @@
  */
 package lesson05;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Random;
 

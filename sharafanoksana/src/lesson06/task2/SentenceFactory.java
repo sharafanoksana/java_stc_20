@@ -10,27 +10,38 @@ import java.util.List;
 
 
 class SentenceFactory {
-    private List<String> words= new ArrayList<>();
+    private List<String> words;
+    private int probability;
     private List<String> arrayWords = new ArrayList<>();
 
     /**
      * В конструктор передается словарь для создания предложений
+     *
      * @param words ArrayList слов
      */
-    public SentenceFactory(List<String> words) {
+    public SentenceFactory(List<String> words, int probability) {
         this.words = words;
+        this.probability = probability;
     }
 
     /**
      * Метод генерирует список слов. Слово состоит из 1<=n2<=15 латинских букв
      * В предложении после произвольных слов могут находиться запятые.
+     *
      * @return возвращает список слов для составления предложения
      */
-    private List<String> getWordForSentence() {
+    private List<String> getWordForSentence(){
         int lenghtSentence = RandomNumberGenerator.getRandom(1, 15);
+        int sizeDistionary = words.size()-1;
         for (int i = 0; i < lenghtSentence; i++) {
-            String sentence = words.get(RandomNumberGenerator.getRandom(0, 999)) + " ";
-            this.arrayWords.add(sentence);
+            int idxR = RandomNumberGenerator.getRandom(0, sizeDistionary);
+            try {
+                String sentence = words.get( idxR*this.probability/100) + " ";
+                this.arrayWords.add(sentence);
+            }catch (ArrayIndexOutOfBoundsException e){
+                System.out.println("Введено не верное число probability " + this.probability);
+                e.printStackTrace();
+            }
         }
         punctuationInsert();
         return this.arrayWords;
@@ -38,9 +49,11 @@ class SentenceFactory {
 
     /**
      * Метод "склеивает" предложение из списка отформатированных слов
+     *
      * @return строка предложения
+     * @param probability
      */
-    String getSentence() {
+    String getSentence(int probability) {
         return String.join("", getWordForSentence());
     }
 
@@ -49,7 +62,6 @@ class SentenceFactory {
      * где елемент первого слова с большой буквы,
      * в середине в элемент предложения рандомно вставляются знаки припенания,
      * последний елемент предложения заканчивается знаком припенания по рандомному выбору.
-     *
      */
     private void punctuationInsert() {
         // Обработка первого слова в предложении

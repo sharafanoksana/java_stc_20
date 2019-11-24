@@ -5,11 +5,11 @@
  */
 package lesson7;
 
-public class CounterFactorial {
+public class CounterFactorial { //todo
 
-    double calculateFactorial(double elementNum) {
-        double result = 1;
-        for (double i = 1; i <= elementNum; i++) {
+    long calculateFactorial(long elementNum) {
+        long result = 1;
+        for (int i = 1; i <= elementNum; i++) {
             result = result *i;
         }
         return result;

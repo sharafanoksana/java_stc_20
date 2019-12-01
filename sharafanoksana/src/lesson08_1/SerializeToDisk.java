@@ -14,7 +14,8 @@ public class SerializeToDisk {
         {
             Person ted = new Person("Ted", "Neward", 39);
             Person charl = new Person("Charlotte", "Neward", 38);
-            ted.setSpouse(charl); charl.setSpouse(ted);
+            ted.setSpouse(charl);
+            charl.setSpouse(ted);
 
             FileOutputStream fos = new FileOutputStream(args[0]);
             ObjectOutputStream oos = new ObjectOutputStream(fos);

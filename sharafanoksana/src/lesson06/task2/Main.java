@@ -37,6 +37,6 @@ public class Main {
         //Необходимо написать метод getFiles(String path, int n, int size, String[] words, int probability),
         // который создаст n файлов размером size в каталоге path. words - массив слов, probability - вероятность
         String path = "C:\\Users\\sharafan\\IdeaProjects\\java_stc_20\\sharafanoksana\\src\\lesson06\\task2\\randomTexts";
-        fileFactory.getFiles(path, 5, 2500, words,100);
+        fileFactory.getFiles(path, 5, 2500, words, 50);
     }
 }

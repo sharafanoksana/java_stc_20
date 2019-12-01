@@ -3,7 +3,7 @@
  * @date 20.11.2019
  * @package lesson7_1
  */
-package lesson7;
+package lesson07;
 
 /**
  * Дан массив случайных чисел. Написать программу для вычисления факториалов всех элементов массива. Использовать пул потоков для решения задачи
@@ -29,7 +29,7 @@ public class MultithreadClient {
         List<Integer> numbers = new ArrayList<>();
         int countNumbers = 100000;
         for (int k = 0; k < countNumbers; k++) {
-            numbers.add(RandomNumberGenerator.getRandom(0, 10));
+            numbers.add(RandomNumberGenerator.getRandom(0, 100));
         }
         for (long num : numbers) {
             /*при раскоментировании выводится полоное разложение каждого числа массива numbers на составляющие,
@@ -44,14 +44,13 @@ public class MultithreadClient {
 //            }
         }
 
-
+        //todo сделать хаш мап где ключ num из numbers а значение future из futures
         for (Future<Long> future : futures) {
-            System.out.println(future.get());
+            System.out.println(future.get() + " = " );
         }
-        System.out.printf("Executed by %d s, value", (System.nanoTime() - start) / (1000_000_000));
+        System.out.printf("Executed by %d s", (System.nanoTime() - start) / (1000_000_000));
 
         // завершение работы программы
         threadPool.shutdown();
-        //todo
     }
 }

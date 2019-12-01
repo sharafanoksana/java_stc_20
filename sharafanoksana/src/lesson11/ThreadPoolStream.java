@@ -3,20 +3,20 @@
  * @date 20.11.2019
  * @package lesson7_1
  */
-package lesson7;
+package lesson11;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executor;
 
-public class ThreadPool implements Executor {
+public class ThreadPoolStream implements Executor {
     /**
      * Queue<Runnable> workQueue - очередь задач на выполнение, если запущено больше потоков чем размер начального пула.
      */
     private final Queue<Runnable> workQueue = new ConcurrentLinkedQueue<>();
     private volatile boolean isRunning = true;
 
-    public ThreadPool(int nThreads) {
+    public ThreadPoolStream(int nThreads) {
         for (int i = 0; i < nThreads; i++) {
             new Thread(new TaskWorker()).start();
         }

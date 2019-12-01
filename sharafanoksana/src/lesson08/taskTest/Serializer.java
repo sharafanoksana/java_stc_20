@@ -3,12 +3,12 @@
  * @date 21.11.2019
  * @package lesson8
  */
-package lesson8;
+package lesson08.taskTest;
+
+import lesson08.Person;
 
 import java.io.*;
 import java.lang.reflect.Field;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Serializer extends ClassLoader {
 
@@ -61,8 +61,9 @@ public class Serializer extends ClassLoader {
 //            System.out.println(ex.getMessage());
 //        }
         System.out.println(p);
-        System.out.printf("Человека зовут: %s , его возраст: %d , его рост: %f метров, женат/замужем: %b",
-                p.name, p.age, p.height, p.married);
+        System.out.printf("Человека зовут: %s , его возраст: %d , его рост: %f метров, женат/замужем: %b"
+//                ,p.name, p.age, p.height, p.married
+        );
         return p;
     }
 

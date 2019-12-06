@@ -49,9 +49,9 @@ public class ThreadPool implements Executor {
         public void run() {
             while (isRunning) {
                 Runnable nextTask = workQueue.poll(); //удаляет верхний элемент из очереди
+                System.out.println("Message from " + Thread.currentThread().getName());
                 if (nextTask != null) {
-                    nextTask.run();
-                }
+                    nextTask.run();                }
             }
         }
     }

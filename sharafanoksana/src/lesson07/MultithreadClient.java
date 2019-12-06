@@ -46,7 +46,7 @@ public class MultithreadClient {
 
         //todo сделать хаш мап где ключ num из numbers а значение future из futures
         for (Future<Long> future : futures) {
-            System.out.println(future.get() + " = " );
+            System.out.println(future.get() + " = ");
         }
         System.out.printf("Executed by %d s", (System.nanoTime() - start) / (1000_000_000));
 

@@ -5,9 +5,18 @@
  */
 package lesson15;
 
-import java.sql.*;
+import lesson15.DataBaseTables.RolePersonDaoJdbcImpl;
+import lesson15.DataBaseTables.UserPersonDaoJdbcImpl;
+import lesson15.DataBaseTables.UserRolesDaoJdbcImpl;
+import lesson15.Entities.RolePerson;
+import lesson15.Entities.UserPerson;
+import lesson15.service.DateHelper;
+
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -28,126 +37,80 @@ import java.util.List;
  * данные на последней операции, что бы транзакция откатилась к логической точке SAVEPOINT A
  */
 public class Main {
-    public static void main(String[] args) {
-        List<UserS> userSList = new ArrayList<>();
-        userSList.add(new UserS("Timur", "1993-05-21", "green", "Казань", "timur93@gmail.com", "lkfsaghakdlhglashgd;ahs;g"));
-        userSList.add(new UserS("Mira", "1989-04-07", "mira", "Иннополис", "mira89@gmail.com", "gdhga;lhg jldfjaslg;"));
-        userSList.add(new UserS("Olga", "1998-05-21", "olga21", "Москва", "olga21@gmail.com", "galkglahg;lh jglajfd ghlj hj"));
-        userSList.add(new UserS("Maya", "000-09-14", "pchela", "Киев", "MayaP4la@gmail.com", "gjladfgjja"));
-        userSList.add(new UserS("Aleks", "1980-05-13", "ALEKS80", "Москвa", "ALEKSNOV@gmail.com", "ALGKH LAKGJ; DFJDLASKGA;"));
-        userSList.add(new UserS("Luka", "1999-10-03", "Luka", "Mинск", "LukaO3V@gmail.com", "aklhg;ebn ,mcпфрыодвр"));
+    public static void main(String[] args) throws ParseException {
+        List<UserPerson> userPersonList = new ArrayList<>();
 
-//        createTable();
-//        insertTableRoles();
-//        insertTableUsers_Roles();
-        insertTableUsers(userSList);
+        userPersonList.add(new UserPerson("Max", DateHelper.getDate("1978-08-21"), "Billing", "Казань", "timur93@gmail.com", "lkfsaghakdlhglashgd;ahs;g"));
+        userPersonList.add(new UserPerson("Mira", DateHelper.getDate("1989-04-07"), "mira", "Иннополис", "mira89@gmail.com", "gdhga;lhg jldfjaslg;"));
+        userPersonList.add(new UserPerson("Olga", DateHelper.getDate("1998-05-21"), "olga21", "Москва", "olga21@gmail.com", "galkglahg;lh jglajfd ghlj hj"));
+        userPersonList.add(new UserPerson("Maya", DateHelper.getDate("1991-11-12"), "pchela", "Киев", "MayaP4la@gmail.com", "gjladfgjja"));
+        userPersonList.add(new UserPerson("Aleks", DateHelper.getDate("1980-05-13"), "ALEKS80", "Москвa", "ALEKSNOV@gmail.com", "ALGKH LAKGJ; DFJDLASKGA;"));
+        userPersonList.add(new UserPerson("Luka", DateHelper.getDate("1999-10-03"), "Luka", "Mинск", "LukaO3V@gmail.com", "aklhg;ebn ,mcпфрыодвр"));
+        userPersonList.add(new UserPerson("Mark", DateHelper.getDate("1989-03-03"), "Admin", "Казань", "Admin@gmail.com", "iojhablkndfb;"));
+
+        List<RolePerson> listRoles = new ArrayList<>();
+        listRoles.add(new RolePerson("Administration", "Aдминистратор"));
+        listRoles.add(new RolePerson("Clients", "Клиент"));
+        listRoles.add(new RolePerson("Billing", "Состояние счета"));
+
+
+        createTable();
+        insertTableRoles(listRoles);
+        insertTableUsers(userPersonList);
+        insertIdInTableUsersRoles(userPersonList);
+        updateTableUsersRoles(1,1);
+        int[] idUser ={2,3,4};
+        // здесь же использую SavePoint и перевежу connection в ручное управление транзакциями
+        updateTableUsersRolesBatch(idUser, 3);
+
     }
 
-    private static void insertTableUsers(List<UserS> userSList) {
-
+    private static void updateTableUsersRolesBatch(int[] idUser, int i) {
+        UserRolesDaoJdbcImpl userRolesDaoJdbc = new UserRolesDaoJdbcImpl();
+        System.out.println("Внесены изменения в таблицу users_roles для поля role_id для пользователей " +
+                "с заданным значение id в массиве: " + userRolesDaoJdbc.updateIdRolesInUsersRolesBatch(idUser, i));
     }
 
-    private static void insertTableUsersRoles() {
-
+    private static void updateTableUsersRoles(int id,int val) {
+        UserRolesDaoJdbcImpl userRolesDaoJdbc = new UserRolesDaoJdbcImpl();
+        UserPersonDaoJdbcImpl userPersonDaoJdbc = new UserPersonDaoJdbcImpl();
+        UserPerson person = userPersonDaoJdbc.getUserById(id);
+            System.out.println("id:" + person.getId() + " " + person.getName() +
+                    " роль пользователя в таблице USERS_ROLES изменена:  "
+                    + userRolesDaoJdbc.updateIdRolesInUsersRoles(person, val));
     }
 
-    private static void insertTableRoles() {
-        final String SQL_INSERT_ROLES = "INSERT INTO ROLES(name, description) VALUES(?,?)";
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+    private static void insertIdInTableUsersRoles(List<UserPerson> userPersonList) {
+        UserRolesDaoJdbcImpl userRolesDaoJdbc = new UserRolesDaoJdbcImpl();
+        for (UserPerson userPerson : userPersonList) {
+            System.out.println(userPerson.getId() + " " + userPerson.getName() +
+                    " пользователя добавлено в таблицу USERS_ROLES " + userRolesDaoJdbc.addUserRoles(userPerson, 2));
         }
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/lesson15",
-                    "postgres",
-                    "postgres");
-        } catch (SQLException e) {
-            e.printStackTrace();
+    }
+
+    private static void insertTableUsers(List<UserPerson> userPersonList) {
+        UserPersonDaoJdbcImpl db = new UserPersonDaoJdbcImpl();
+        for (UserPerson user : userPersonList) {
+            db.addUser(user);
+            System.out.println(user.getName() + " - добавлена в таблицу USERS: id="
+                    + user.getId());
         }
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(SQL_INSERT_ROLES);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            preparedStatement.setString(1, "Administration");
-            preparedStatement.setString(2, "Aдминистратор");
-            preparedStatement.setString(1, "Clients");
-            preparedStatement.setString(2, "Клиент");
-            preparedStatement.setString(1, "Billing");
-            preparedStatement.setString(2, "Состояние счета");
-            preparedStatement.executeUpdate(); //при изменении таблицы используем метод executeUpdate()
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    }
+
+    private static void insertTableRoles(List<RolePerson> listRoles) {
+        RolePersonDaoJdbcImpl rolesDb = new RolePersonDaoJdbcImpl();
+        System.out.println("Таблица roles заполнена значениями: " + rolesDb.insertAllRolesTable(listRoles));
     }
 
     public static void createTable() {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/lesson15",
-                    "postgres",
-                    "postgres");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            statement.execute(
-//                    "drop table users_roles cascade ;\n" +
-//                            "drop table roles;\n" +
-//                            "drop table users;" +
+        UserPersonDaoJdbcImpl userPersonDaoJdbc = new UserPersonDaoJdbcImpl();
+        System.out.println("табица user создана: " + userPersonDaoJdbc.createUserTable());
 
-                    "create TABLE users(\n" +
-                            "    id          serial primary KEY,\n" +
-                            "    name        VARCHAR(30) not NULL,\n" +
-                            "    birthday    DATE,\n" +
-                            "    login       VARCHAR(30) not null UNIQUE,\n" +
-                            "    city        VARCHAR(30),\n" +
-                            "    email       VARCHAR(50) not null,\n" +
-                            "    description VARCHAR(255)\n" +
-                            ");\n" +
-                            "INSERT INTO users (name, birthday, login, city, email, description)" +
-                            "VALUES\n" +
-                            "('Timur1', '1993-05-21', 'green1', 'Казань', 'timur931@gmail.com', 'lkfsaghakdlhglashgd;ahs;g')," +
-                            "('Mira1', '1989-04-07', 'mira1', 'Иннополис', 'mira891@gmail.com', 'gdhga;lhg jldfjaslg; ')," +
-                            "('Olga1', '1998-05-21', 'olga211', 'Москва', 'olga211@gmail.com', 'galkglahg;lh jglajfd ghlj hj')," +
-                            "('Aleks1', '1980-05-13', 'ALEKS801', 'Москва', 'ALEKSNOV1@gmail.com', 'ALGKH LAKGJ; DFJDLASKGA;')," +
-                            "('Maya1', '2000-09-14', 'pchela1', 'Киев', 'MayaP4la1@gmail.com', 'gjladfgjja')," +
-                            "('Luka1', '1999-10-03', 'Luka1', 'Минск', 'LukaO3V1@gmail.com', 'aklhg;ebn ,mcпфрыодвр');" +
+        RolePersonDaoJdbcImpl rolePersonDaoJdbc = new RolePersonDaoJdbcImpl();
+        System.out.println("табица role создана: " + rolePersonDaoJdbc.createRoleTable());
 
-                            "create TABLE roles\n" +
-                            "(\n" +
-                            "    id          serial primary KEY,\n" +
-                            "    name        VARCHAR(15) not null UNIQUE,\n" +
-                            "    description VARCHAR(255)\n" +
-                            ");\n" +
-
-                            "create TABLE users_roles\n" +
-                            "(\n" +
-                            "    id      serial primary KEY,\n" +
-                            "    user_id int not null UNIQUE references users,\n" +
-                            "    role_id int not null references roles\n" +
-                            ");"
-            );
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        UserRolesDaoJdbcImpl userRoleDaoJdbc = new UserRolesDaoJdbcImpl();
+        System.out.println("табица userRole создана: " + userRoleDaoJdbc.createUserRoleTable());
     }
 }
 

@@ -3,19 +3,20 @@
  * @date 05.12.2019
  * @package lesson15
  */
-package lesson15;
+package lesson15.Entities;
 
-import java.util.Date;
+import java.sql.Date;
 
-public class UserS {
+public class UserPerson {
+    private int id;
     private String name;
-    private String birthday;
+    private Date birthday;
     private String login;
     private String city;
     private String email;
     private String description;
 
-    public UserS(String name, String birthday, String login, String city, String email, String description) {
+    public UserPerson(String name, Date birthday, String login, String city, String email, String description) {
         this.name = name;
         this.birthday = birthday;
         this.login = login;
@@ -23,7 +24,6 @@ public class UserS {
         this.email = email;
         this.description = description;
     }
-
     public String getName() {
         return name;
     }
@@ -32,11 +32,11 @@ public class UserS {
         this.name = name;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -70,5 +70,26 @@ public class UserS {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setKey(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "UserPerson{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", birthday=" + birthday +
+                ", login='" + login + '\'' +
+                ", city='" + city + '\'' +
+                ", email='" + email + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

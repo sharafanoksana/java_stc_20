@@ -5,6 +5,7 @@
  */
 package lesson15;
 
+import lesson15.DataBaseTables.LogsDaoJdbc;
 import lesson15.DataBaseTables.RolePersonDaoJdbcImpl;
 import lesson15.DataBaseTables.UserPersonDaoJdbcImpl;
 import lesson15.DataBaseTables.UserRolesDaoJdbcImpl;
@@ -103,6 +104,9 @@ public class Main {
     }
 
     public static void createTable() {
+        LogsDaoJdbc logsDaoJdbc = new LogsDaoJdbc();
+        System.out.println("табица logs создана: " + logsDaoJdbc.createLogsTable());
+
         UserPersonDaoJdbcImpl userPersonDaoJdbc = new UserPersonDaoJdbcImpl();
         System.out.println("табица user создана: " + userPersonDaoJdbc.createUserTable());
 

@@ -12,6 +12,7 @@
                 <Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
             </PatternLayout>
         </File>
+
         <Console name="stdout" target="SYSTEM_OUT">
             <PatternLayout pattern="%m%n"/>
         </Console>

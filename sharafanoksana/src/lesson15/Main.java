@@ -5,19 +5,13 @@
  */
 package lesson15;
 
-import lesson15.DataBaseTables.LogsDaoJdbc;
-import lesson15.DataBaseTables.RolePersonDaoJdbcImpl;
-import lesson15.DataBaseTables.UserPersonDaoJdbcImpl;
-import lesson15.DataBaseTables.UserRolesDaoJdbcImpl;
-import lesson15.Entities.RolePerson;
-import lesson15.Entities.UserPerson;
+import lesson15.dataBaseTables.*;
+import lesson15.entities.RolePerson;
+import lesson15.entities.UserPerson;
 import lesson15.service.DateHelper;
 
-import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -115,6 +109,19 @@ public class Main {
 
         UserRolesDaoJdbcImpl userRoleDaoJdbc = new UserRolesDaoJdbcImpl();
         System.out.println("табица userRole создана: " + userRoleDaoJdbc.createUserRoleTable());
+    }
+
+
+    public void method1(UserRolesDao userRolesDao) {
+
+//        Mobile mobile = new Mobile(null, "Iphone 2", 25000, "Apple");
+//        mobileDao.addMobile(mobile);
+//        mobile = mobileDao.getMobileById(4);
+//        LOGGER.info("Начальный объект: {}", mobile);
+//        mobile.setPrice(70000);
+//        mobileDao.updateMobileById(mobile);
+//        mobile = mobileDao.getMobileById(4);
+//        LOGGER.info("Итоговый объект: {}", mobile);
     }
 }
 

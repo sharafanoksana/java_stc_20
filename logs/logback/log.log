@@ -1,0 +1,11 @@
+19.12.2019 12:19:43.109 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO | Cоздана таблица users_roles
+19.12.2019 12:19:44.209 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO | В таблицу users_roles занесены данные (users_id, roles_id) по Max
+19.12.2019 12:19:44.473 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO | В таблицу users_roles занесены данные (users_id, roles_id) по Mira
+19.12.2019 12:19:44.593 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO | В таблицу users_roles занесены данные (users_id, roles_id) по Olga
+19.12.2019 12:19:44.827 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO | В таблицу users_roles занесены данные (users_id, roles_id) по Maya
+19.12.2019 12:19:44.935 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO | В таблицу users_roles занесены данные (users_id, roles_id) по Aleks
+19.12.2019 12:19:45.085 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO | В таблицу users_roles занесены данные (users_id, roles_id) по Luka
+19.12.2019 12:19:45.180 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO | В таблицу users_roles занесены данные (users_id, roles_id) по Mark
+19.12.2019 12:19:45.393 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO
+19.12.2019 12:19:45.536 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO | В таблицу users_roles внесены изменения пакетом по данным (users_id, roles_id)
+19.12.2019 12:19:45.539 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO | В таблицу users_roles внесены изменения пакетом по данным (users_id, roles_id) с возможностью rollback(savepoint2)

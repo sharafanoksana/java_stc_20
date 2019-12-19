@@ -9,6 +9,8 @@ import lesson15.dataBaseTables.*;
 import lesson15.entities.RolePerson;
 import lesson15.entities.UserPerson;
 import lesson15.service.DateHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ import java.util.List;
  * данные на последней операции, что бы транзакция откатилась к логической точке SAVEPOINT A
  */
 public class Main {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) throws ParseException {
         List<UserPerson> userPersonList = new ArrayList<>();
 
@@ -113,6 +117,14 @@ public class Main {
 
 
     public void method1(UserRolesDao userRolesDao) {
+        UserPerson userPerson = new UserPerson(100,"Mark1", DateHelper.getDate("1989-03-03"), "Admin1", "Казань", "Admin1@gmail.com", "iojhablkJJDSJndfb;");
+        userRolesDao.addUserRoles(userPerson, 1);
+        userPerson = userRolesDao.getIdRolesInUsersRoles(3);
+        LOGGER.info("Начальный объект: {}", userPerson);
+        userPerson.setCity("МОСКВА");
+        userRolesDao.updateIdRolesInUsersRoles(userPerson, 1);
+        userPerson = userRolesDao.getIdRolesInUsersRoles(1);
+        LOGGER.info("Итоговый объект: {}", userPerson);
 
 //        Mobile mobile = new Mobile(null, "Iphone 2", 25000, "Apple");
 //        mobileDao.addMobile(mobile);

@@ -23,7 +23,6 @@ public class MainTest {
     private Main main;
     private UserRolesDao userRolesDao;
     private ConnectionManager connectionManager;
-    private Object UserRolesDao;
 
     @BeforeEach
     void setUp() {
@@ -50,7 +49,7 @@ public class MainTest {
 
     @Test
     void main() {
-        assertDoesNotThrow(() -> main.method1((lesson15.dataBaseTables.UserRolesDao) UserRolesDao));
+        assertDoesNotThrow(() -> main.method1(userRolesDao));
     }
 
     @Test

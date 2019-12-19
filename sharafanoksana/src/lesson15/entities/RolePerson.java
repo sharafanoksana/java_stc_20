@@ -18,6 +18,9 @@ public class RolePerson {
         this.description = description;
     }
 
+    public RolePerson(int id, String name, String description) {
+    }
+
     public int getId() {
         return id;
     }

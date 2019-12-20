@@ -115,13 +115,17 @@ public class Main {
         System.out.println("табица userRole создана: " + userRoleDaoJdbc.createUserRoleTable());
     }
 
+// todo здесь что-то не так ( !!! этот метод не отрабатывает долджным образом, т.к. без добавления пользователя
+//  в таблицу юзеров происходит: ОШИБКА: INSERT или UPDATE в таблице "users_roles" нарушает ограничение внешнего ключа
+//  "users_roles_user_id_fkey"
 
-    public void method1(UserRolesDao userRolesDao) {
-        UserPerson userPerson = new UserPerson(100,"Mark1", DateHelper.getDate("1989-03-03"), "Admin1", "Казань", "Admin1@gmail.com", "iojhablkJJDSJndfb;");
+    public void method1(UserRolesDao userRolesDao, UserPerson userPerson) {
+        UserPersonDao userPersonDao = new UserPersonDaoJdbcImpl();
+        userPersonDao.addUser(userPerson); //при раскометрировании строки юзер записывается в таблицу "users_roles" и тест проходит успешно
         userRolesDao.addUserRoles(userPerson, 1);
-        userPerson = userRolesDao.getIdRolesInUsersRoles(3);
+        userPerson = userRolesDao.getIdRolesInUsersRoles(1);
         LOGGER.info("Начальный объект: {}", userPerson);
-        userPerson.setCity("МОСКВА");
+            userPerson.setCity("10000");
         userRolesDao.updateIdRolesInUsersRoles(userPerson, 1);
         userPerson = userRolesDao.getIdRolesInUsersRoles(1);
         LOGGER.info("Итоговый объект: {}", userPerson);

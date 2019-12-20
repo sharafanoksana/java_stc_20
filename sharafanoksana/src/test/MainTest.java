@@ -10,6 +10,8 @@ import lesson15.connectionManager.ConnectionManager;
 import lesson15.connectionManager.ConnectionManagerJdbcImpl;
 import lesson15.dataBaseTables.UserRolesDao;
 import lesson15.dataBaseTables.UserRolesDaoJdbcImpl;
+import lesson15.entities.UserPerson;
+import lesson15.service.DateHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.*;
@@ -49,12 +51,15 @@ public class MainTest {
 
     @Test
     void main() {
-        assertDoesNotThrow(() -> main.method1(userRolesDao));
+        UserPerson userPerson = new UserPerson(
+                "MARK2", DateHelper.getDate("1989-03-03"), "Admin2", "Казань", "Admin2@gmail.com", "iojhablkJJDSJndfb;");
+        assertDoesNotThrow(() -> main.method1(userRolesDao, userPerson));
     }
 
     @Test
     void mainWithException() {
-        assertThrows(NullPointerException.class, () -> main.method1(null));
+        assertThrows(NullPointerException.class,
+                () -> main.method1(null, null));
     }
 
 }

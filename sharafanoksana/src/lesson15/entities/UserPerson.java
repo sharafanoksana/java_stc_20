@@ -80,6 +80,10 @@ public class UserPerson {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setKey(int id) {
         this.id = id;
     }

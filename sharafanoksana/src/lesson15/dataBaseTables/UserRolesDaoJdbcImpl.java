@@ -62,7 +62,7 @@ public class UserRolesDaoJdbcImpl implements UserRolesDao {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USERS_ROLES);
             preparedStatement.setInt(1, userPerson.getId());
             preparedStatement.setInt(2, idRole);
-            preparedStatement.executeUpdate(); //при изменении таблицы используем метод executeUpdate()
+            preparedStatement.execute(); //при изменении таблицы используем метод executeUpdate()
             LOGGER.info("INFO | В таблицу users_roles занесены данные (users_id, roles_id) по " + userPerson.getName());
         } catch (SQLException e) {
             LOGGER.error("Some thing wrong in addUserRoles method", e);

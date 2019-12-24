@@ -1,0 +1,2 @@
+20.12.2019 18:27:38.457 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO | В таблицу users_roles занесены данные (users_id, roles_id) по MARK2
+20.12.2019 18:27:38.647 [main] INFO  l.d.UserRolesDaoJdbcImpl - INFO

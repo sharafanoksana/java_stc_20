@@ -102,8 +102,8 @@ public class Main {
     }
 
     public static void createTable() {
-        LogsDaoJdbc logsDaoJdbc = new LogsDaoJdbc();
-        System.out.println("табица logs создана: " + logsDaoJdbc.createLogsTable());
+//        LogsDaoJdbc logsDaoJdbc = new LogsDaoJdbc();
+//        System.out.println("табица logs создана: " + logsDaoJdbc.createLogsTable());
 
         UserPersonDaoJdbcImpl userPersonDaoJdbc = new UserPersonDaoJdbcImpl();
         System.out.println("табица user создана: " + userPersonDaoJdbc.createUserTable());
@@ -129,15 +129,6 @@ public class Main {
         userRolesDao.updateIdRolesInUsersRoles(userPerson, 1);
         userPerson = userRolesDao.getIdRolesInUsersRoles(1);
         LOGGER.info("Итоговый объект: {}", userPerson);
-
-//        Mobile mobile = new Mobile(null, "Iphone 2", 25000, "Apple");
-//        mobileDao.addMobile(mobile);
-//        mobile = mobileDao.getMobileById(4);
-//        LOGGER.info("Начальный объект: {}", mobile);
-//        mobile.setPrice(70000);
-//        mobileDao.updateMobileById(mobile);
-//        mobile = mobileDao.getMobileById(4);
-//        LOGGER.info("Итоговый объект: {}", mobile);
     }
 }
 

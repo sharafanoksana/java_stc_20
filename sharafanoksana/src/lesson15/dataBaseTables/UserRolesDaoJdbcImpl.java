@@ -13,10 +13,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import javax.ejb.EJB;
+import javax.inject.Inject;
 import java.sql.*;
 
+@EJB
 public class UserRolesDaoJdbcImpl implements UserRolesDao {
-    public static final String SQL_INSERT_USERS_ROLES = "INSERT INTO USERS_ROLES(user_id, role_id) VALUES(?,?)";
+    public static final String SQL_INSERT_USERS_ROLES =
+            "DROP TABLE IF EXISTS users_roles;\n" +
+            "create TABLE users_roles\n" +
+            "(\n" +
+            "    id      serial primary KEY,\n" +
+            "    user_id int not null UNIQUE references users,\n" +
+            "    role_id int not null references roles\n" +
+            ");" +
+                    "alter table users_roles owner to postgres;";
     public static final String SQL_UPDATE_USERS_ROLES = "UPDATE users_roles SET role_id=? WHERE user_id=?";
     public static final String SQL_DELETE_USERS_ROLES = "DELETE FROM users_roles WHERE user_id=?";
     public static final String SQL_SELECT_USERS_ROLES = "SELECT * FROM users_roles WHERE user_id=?";
@@ -24,36 +35,11 @@ public class UserRolesDaoJdbcImpl implements UserRolesDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserRolesDaoJdbcImpl.class);
 
-    private static ConnectionManager connectionManager = ConnectionManagerJdbcImpl.getInstance();
+    private ConnectionManager connectionManager;
 
+    @Inject
     public UserRolesDaoJdbcImpl(ConnectionManager connectionManager) {
         this.connectionManager = connectionManager;
-    }
-
-    public UserRolesDaoJdbcImpl() {
-
-    }
-
-    @Override
-    public boolean createUserRoleTable() {
-        try (Connection connection = connectionManager.getConnection()) {
-
-            Statement statement = connection.createStatement();
-            statement.execute(
-                    "create TABLE users_roles\n" +
-                            "(\n" +
-                            "    id      serial primary KEY,\n" +
-                            "    user_id int not null UNIQUE references users,\n" +
-                            "    role_id int not null references roles\n" +
-                            ");"
-            );
-            LOGGER.info("INFO | Cоздана таблица users_roles");
-        } catch (SQLException e) {
-            LOGGER.error("Some thing wrong in createUserRoleTable method", e);
-            e.printStackTrace();
-            return false;
-        }
-        return true;
     }
 
     @Override
@@ -97,7 +83,6 @@ public class UserRolesDaoJdbcImpl implements UserRolesDao {
             LOGGER.info("INFO | Удален пользователь в таблице users_roles по users_id " + id);
         } catch (SQLException e) {
             LOGGER.error("Some thing wrong in deleteUsersRolesById method", e);
-            ;
             e.printStackTrace();
             return false;
         }
@@ -122,6 +107,7 @@ public class UserRolesDaoJdbcImpl implements UserRolesDao {
 
     /**
      * Метод выбирает пользователей по роли
+     *
      * @param id - id_role по которому будут выбраны все пользователи
      * @return возвращает пользователей с заданным id_role
      */
@@ -133,13 +119,13 @@ public class UserRolesDaoJdbcImpl implements UserRolesDao {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return new UserPerson(
-                                    resultSet.getInt(1),
-                                    resultSet.getString(2),
-                                    resultSet.getDate(3),
-                                    resultSet.getString(4),
-                                    resultSet.getString(5),
-                                    resultSet.getString(6),
-                                    resultSet.getString(7));
+                            resultSet.getInt(1),
+                            resultSet.getString(2),
+                            resultSet.getDate(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            resultSet.getString(7));
                 }
             }
         } catch (SQLException e) {
@@ -184,9 +170,6 @@ public class UserRolesDaoJdbcImpl implements UserRolesDao {
             LOGGER.error("Some thing wrong in updateIdRolesInUsersRolesBatch method", e);
             e.printStackTrace();
         }
-
         return false;
-
     }
-
 }

@@ -5,7 +5,8 @@
 <h2>Users list</h2>
 
 <c:forEach items="${users}" var="userPerson">
-    <a href='showusers?id=${userPerson.id}'>${userPerson.users}></a><p>
-</c:forEach>
+<a href='showusers?id=${userPerson.id}'>${userPerson.users}></a>
+<p>
+    </c:forEach>
 </body>
 </html>

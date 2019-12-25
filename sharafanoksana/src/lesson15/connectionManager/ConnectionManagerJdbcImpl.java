@@ -5,10 +5,12 @@
  */
 package lesson15.connectionManager;
 
+import javax.ejb.EJB;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+@EJB
 public class ConnectionManagerJdbcImpl implements ConnectionManager {
     private static ConnectionManager connectionManager;
 

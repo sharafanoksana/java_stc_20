@@ -22,7 +22,12 @@ public class ShowUserServlet extends HttpServlet {
     private UserPersonDao userPersonDao;
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void init() throws ServletException {
+        userPersonDao = (UserPersonDao) getServletContext().getAttribute("dao");
+        super.init();
+    }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("id");
         if (userId == null){
             throw new ServletException("Missing parametr id");

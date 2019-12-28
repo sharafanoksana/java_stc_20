@@ -54,6 +54,11 @@ public class UserPersonDaoJdbcImpl implements UserPersonDao {
     public UserPersonDaoJdbcImpl(ConnectionManager connectionManager) {
         this.connectionManager = connectionManager;
     }
+
+    public UserPersonDaoJdbcImpl() {
+
+    }
+
     @Override
     public boolean addUser(UserPerson person) {
         try (Connection connection = connectionManager.getConnection();) {

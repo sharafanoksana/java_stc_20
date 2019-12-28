@@ -34,7 +34,7 @@ import java.util.List;
  * данные на последней операции, что бы транзакция откатилась к логической точке SAVEPOINT A
  */
 public class Main {
-//    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 //
 //    public static void main(String[] args) throws ParseException {
 //        List<UserPerson> userPersonList = new ArrayList<>();
@@ -119,16 +119,16 @@ public class Main {
 ////  в таблицу юзеров происходит: ОШИБКА: INSERT или UPDATE в таблице "users_roles" нарушает ограничение внешнего ключа
 ////  "users_roles_user_id_fkey"
 //
-//    public void method1(UserRolesDao userRolesDao, UserPerson userPerson) {
-//        UserPersonDao userPersonDao = new UserPersonDaoJdbcImpl();
-//        userPersonDao.addUser(userPerson); //при раскометрировании строки юзер записывается в таблицу "users_roles" и тест проходит успешно
-//        userRolesDao.addUserRoles(userPerson, 1);
-//        userPerson = userRolesDao.getIdRolesInUsersRoles(1);
-//        LOGGER.info("Начальный объект: {}", userPerson);
-//            userPerson.setCity("10000");
-//        userRolesDao.updateIdRolesInUsersRoles(userPerson, 1);
-//        userPerson = userRolesDao.getIdRolesInUsersRoles(1);
-//        LOGGER.info("Итоговый объект: {}", userPerson);
-//    }
+    public void method1(UserRolesDao userRolesDao, UserPerson userPerson) {
+        UserPersonDao userPersonDao = new UserPersonDaoJdbcImpl();
+        userPersonDao.addUser(userPerson); //при раскометрировании строки юзер записывается в таблицу "users_roles" и тест проходит успешно
+        userRolesDao.addUserRoles(userPerson, 1);
+        userPerson = userRolesDao.getIdRolesInUsersRoles(1);
+        LOGGER.info("Начальный объект: {}", userPerson);
+            userPerson.setCity("10000");
+        userRolesDao.updateIdRolesInUsersRoles(userPerson, 1);
+        userPerson = userRolesDao.getIdRolesInUsersRoles(1);
+        LOGGER.info("Итоговый объект: {}", userPerson);
+    }
 }
 

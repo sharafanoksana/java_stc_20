@@ -33,13 +33,12 @@ public class ShowUserServlet extends HttpServlet {
             throw new ServletException("Missing parametr id");
         }
         UserPerson userPerson = userPersonDao.getUserById(Integer.valueOf(userId));
-        System.out.println(userPerson);
         if (userPerson == null){
             resp.setStatus(404);
-            req.getRequestDispatcher("WEB-INF/jsp/notfound.jsp").forward(req, resp);
+            req.getRequestDispatcher("/notfound.jsp").forward(req, resp);
             return;
         }
-        req.setAttribute("userPerson", userPerson);
-        req.getRequestDispatcher("WEB-INF/jsp/showuser.jsp").forward(req, resp);
+        req.setAttribute("user", userPerson);
+        req.getRequestDispatcher("/showuser.jsp").forward(req, resp);
     }
 }

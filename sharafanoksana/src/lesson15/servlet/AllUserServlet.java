@@ -34,7 +34,9 @@ public class AllUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Collection<UserPerson> userPersonCollection = userPersonDao.getAllUserPerson();
-        req.setAttribute("user", userPersonCollection);
-        req.getRequestDispatcher("WEB-INF/jsp/allusers.jsp").forward(req, resp);
+        req.setAttribute("users", userPersonCollection);
+        req.setAttribute("PageTitle", "Users");
+        req.setAttribute("PageBody", "allUsers.jsp");
+        req.getRequestDispatcher("/layout.jsp").forward(req, resp);
     }
 }

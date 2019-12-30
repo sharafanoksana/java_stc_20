@@ -9,10 +9,50 @@
         <param-value>true</param-value>
     </context-param>
 
+        <servlet>
+            <servlet-name>errorHandler</servlet-name>
+            <servlet-class>lesson15.servlet.AppErrorHandler</servlet-class>
+            <load-on-startup>1</load-on-startup>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>errorHandler</servlet-name>
+            <url-pattern>/error</url-pattern>
+        </servlet-mapping>
+
+<!--        <error-page>-->
+<!--            <error-code>404</error-code>-->
+
+<!--            <location>/error</location>-->
+<!--        </error-page>-->
+<!--        <error-page>-->
+<!--            <exception-type>java.lang.Throwable</exception-type>-->
+
+<!--            <location>/error</location>-->
+<!--        </error-page>-->
+
     <jsp-config>
         <taglib>
             <taglib-uri>dateTag</taglib-uri>
             <taglib-location>/webapp/WEB-INF/date.tld</taglib-location>
         </taglib>
     </jsp-config>
+
+
+
+<!--    <security-constraint>-->
+<!--        <web-resource-collection>-->
+<!--            <web-resource-name>secured</web-resource-name>-->
+<!--            <url-pattern>/secured/*</url-pattern>-->
+<!--            <http-method>GET</http-method>-->
+<!--            <http-method>POST</http-method>-->
+<!--        </web-resource-collection>-->
+<!--        <auth-constraint>-->
+<!--            <role-name>MANAGER</role-name>-->
+<!--        </auth-constraint>-->
+<!--    </security-constraint>-->
+
+<!--    <security-role>-->
+<!--        <role-name>MANAGER</role-name>-->
+<!--    </security-role>-->
+
 </web-app>

@@ -5,6 +5,7 @@
  */
 package lesson15.servlet;
 
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
@@ -12,7 +13,9 @@ import java.time.LocalDate;
 
 public class DateTag extends TagSupport {
     private String plus = "0";
-    public int doStarting() throws JspTagException{
+
+    @Override
+    public int doStartTag() throws JspException {
         try {
             pageContext.getOut().write(String.valueOf(LocalDate.now().plusDays(Integer.parseInt(plus))));
         }catch (IOException e){

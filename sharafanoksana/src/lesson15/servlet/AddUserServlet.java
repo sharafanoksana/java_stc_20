@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 
 @WebServlet("/showuser")
 public class AddUserServlet extends HttpServlet {
@@ -29,17 +30,22 @@ public class AddUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userId = req.getParameter("id");
-        if (userId == null){
-            throw new ServletException("Missing parameter id");
-        }
-        UserPerson userPerson = userPersonDao.getUserById(Integer.valueOf(userId));
-        if (userPerson == null){
-            resp.setStatus(404);
-            req.getRequestDispatcher("/notfound.jsp").forward(req, resp);
-            return;
-        }
-        req.setAttribute("userPerson", userPerson);
-        req.getRequestDispatcher("/showuser.jsp").forward(req, resp);
+        req.setAttribute("PageTitle", "New User");
+        req.setAttribute("PageBody", "form.jsp");
+        req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        String name = req.getParameter("name");
+        String birthday = req.getParameter("birthday");
+        String login= req.getParameter("login");
+        String city= req.getParameter("city");
+        String email= req.getParameter("email");
+        String description= req.getParameter("description");
+        UserPerson userPerson = new UserPerson(name, Date.valueOf(birthday), login,city,email,description);
+        userPersonDao.addUser(userPerson);
+        resp.sendRedirect(req.getContextPath() + "/allusers");
     }
 }

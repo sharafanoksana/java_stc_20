@@ -39,6 +39,8 @@ public class ShowUserServlet extends HttpServlet {
             return;
         }
         req.setAttribute("user", userPerson);
-        req.getRequestDispatcher("/showuser.jsp").forward(req, resp);
+        req.setAttribute("PageTitle", "Show User");
+        req.setAttribute("PageBody", "/showuser.jsp");
+        req.getRequestDispatcher("/layout.jsp").forward(req, resp);
     }
 }

@@ -36,7 +36,7 @@ public class AllUserServlet extends HttpServlet {
         Collection<UserPerson> userPersonCollection = userPersonDao.getAllUserPerson();
         req.setAttribute("users", userPersonCollection);
         req.setAttribute("PageTitle", "Users");
-        req.setAttribute("PageBody", "allUsers.jsp");
+        req.setAttribute("PageBody", "/allUsers.jsp");
         req.getRequestDispatcher("/layout.jsp").forward(req, resp);
     }
 }

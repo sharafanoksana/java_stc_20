@@ -1,10 +1,9 @@
 /**
  * @author Sharafan Oksana
- * @date 26.11.2019
+ * @date 10.01.2020
  * @package lesson10
  */
 package lesson10;
-
 /**
  * Задание 1. Разработать приложение - многопользовательский чат, в котором участвует произвольное количество клиентов.
  * Каждый клиент после запуска отправляет свое имя серверу. После чего начинает отправлять ему сообщения.
@@ -14,8 +13,16 @@ package lesson10;
  * a.      добавить возможность отправки личных сообщений (unicast).
  * b.      добавить возможность выхода из чата с помощью написанной в чате команды «quit»
  */
-public class Main {
-    public static void main(String[] args) {
 
+public class Client {
+    public static String ipAdres = "localhost";
+    private static int port = 8080;
+
+    /**
+     * создание клиент-соединения с узананными адресом и номером порта
+     * @param args
+     */
+    public static void main(String[] args) {
+        new ClientSomthing(ipAdres, port);
     }
 }
